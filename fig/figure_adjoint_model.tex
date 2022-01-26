@@ -1,0 +1,73 @@
+% \documentclass[class=scrreprt, varwidth=true, border=10pt, convert={size=640x}]{standalone}
+\documentclass{standalone}
+\usepackage[utf8]{inputenc}
+
+\usepackage{amsmath}
+\usepackage{graphicx}
+\graphicspath{{./elements/}}
+
+\usepackage{tikz}
+% \usetikzlibrary{shapes,arrows}
+\usetikzlibrary{arrows,shapes.geometric,positioning}
+
+\begin{document}
+
+% Define block styles
+\tikzstyle{block} = [rectangle, draw, fill={rgb,255:red,200;green,230;blue,250},
+    text centered, rounded corners, align=center,
+    minimum height=2em, minimum width=14em
+    ]
+\tikzstyle{ball} = [rectangle, draw, fill={rgb,255:red,200;green,230;blue,250},
+    text centered, rounded corners,
+    minimum height=2em, minimum width=2em
+    ]
+\tikzstyle{cloud} = [draw, ellipse, draw, fill={rgb,255:red,200;green,230;blue,250},
+    text centered, rounded corners, align=center,
+    minimum height=2em, minimum width=8em
+    ]
+\tikzstyle{line} = [draw, -latex']
+
+\small
+
+\begin{tabular}{@{}c@{}}
+
+\begin{tikzpicture}[node distance=8mm and 35mm, auto]
+    \node [block] (fwd_eq) {Discrete forward equations \\[4pt] {\scriptsize Symbolic language}};
+    \node [cloud, right= of fwd_eq] (fwd_code) {Forward code \\[4pt] {\scriptsize C code}};
+    \node [block, below= of fwd_eq] (adj_eq) {Discrete adjoint equations \\[4pt] {\scriptsize Symbolic language}};
+    \node [cloud, right= of adj_eq] (adj_code) {Adjoint code \\[4pt] {\scriptsize C code}};
+    \path [line] (fwd_eq) -- node {form compiler} (fwd_code);
+    \path [line] (adj_eq) -- node {form compiler} (adj_code);
+    \path [line] (fwd_eq) -- node {symbolic differentiation} (adj_eq);
+\end{tikzpicture}
+% \\[8px]
+% \begin{tikzpicture}[node distance=4mm and 8mm, auto]
+%     \node[minimum width=9em, below= of adj_eq] (fwd) {Forward iteration:};
+%     \node[ball, right= of fwd, xshift=-2.5em] (x0) {$u_0$};
+%     \node[ball, right= of x0] (x1) {$u_1$};
+%     \node[ball, right= of x1] (x2) {$u_2$};
+%     \node[ball, right= of x2] (x3) {$u_3$};
+%     \node[right= of x3] (dots) {$\ldots$};
+%     \node[ball, right= of dots] (xR) {$u_R$};
+%     \node[minimum width=9em, below= of fwd] (adj) {Adjoint iteration:};
+%     \node[ball, right= of adj, xshift=-2.5em] (l0) {$\lambda_0$};
+%     \node[ball, right= of l0] (l1) {$\lambda_1$};
+%     \node[ball, right= of l1] (l2) {$\lambda_2$};
+%     \node[ball, right= of l2] (l3) {$\lambda_3$};
+%     \node[right= of l3] (dots2) {$\ldots$};
+%     \node[ball, right= of dots2] (lR) {$\lambda_R$};
+%     \path [line] (x0) -- (x1);
+%     \path [line] (x1) -- (x2);
+%     \path [line] (x2) -- (x3);
+%     \path [line] (x3) -- (dots);
+%     \path [line] (dots) -- (xR);
+%     \path [line] (l1) -- (l0);
+%     \path [line] (l2) -- (l1);
+%     \path [line] (l3) -- (l2);
+%     \path [line] (dots2) -- (l3);
+%     \path [line] (lR) -- (dots2);
+% \end{tikzpicture}
+
+\end{tabular}
+
+\end{document}
