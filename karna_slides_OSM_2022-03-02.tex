@@ -141,7 +141,7 @@
  \end{itemize}
  \textbf{Parameter estimation}
  \begin{itemize}
-  \item Manual model calibration can be very time consuming
+  \item Calibrating parameters by hand can be very time consuming
  \end{itemize}
  \column{0.53\textwidth}
  Adjoint model
@@ -150,8 +150,8 @@
   \item[+] Accurate
   \item[+] No need to run model ensembles
   \item[+] Cost does not depend on the number of model parameter
-  \item[-] Adjoint model is tedious to implement
-  \item[-] Needs to run backwards in time
+  \item[--] Adjoint model is tedious to implement
+  \item[--] Needs to run backward in time
  \end{itemize}
 \end{columns}
 }
@@ -207,7 +207,7 @@ SIAM J. Sci. Comput., 35(4), C369--C393. \url{https://doi.org/10.1137/120873558}
   \item Python embedded domain-specific language
   \item Automated adjoint capability
   \item \texttt{pyadjoint} package: tape etc.
-  \item Efficient: Gradient evaluation cost = 4x forward model cost
+  \item Efficient: Gradient evaluation cost\\ $\sim$4x forward model cost
  \end{itemize}
  \column{0.45\textwidth}
  \includegraphics[width=0.25\textwidth]{thetis_logo_white}
@@ -237,7 +237,7 @@ SIAM J. Sci. Comput., 35(4), C369--C393. \url{https://doi.org/10.1137/120873558}
   \item Fully implicit solver
   \item Efficiency: 1800x real time\\
         1 day in 48 s; 1 month in 24 mins
-  \item North Sea: Tidally-dominanted
+  \item North Sea: Tidally-dominated
   \item Baltic Sea: No tides, seiche oscillations, slow mean level variability
   \item SSH observations for 60+ tide gauges
  \end{itemize}
@@ -269,10 +269,10 @@ SIAM J. Sci. Comput., 35(4), C369--C393. \url{https://doi.org/10.1137/120873558}
 \frametitle{SSH Animation}
  \vspace*{-4mm}
  \begin{center}
-  % \includegraphics[width=\textwidth]{}
- \movie[autostart,loop,open]
-   {\includegraphics[width=0.95\textwidth]{animation_elev_m014_01_screenshot}}
-   {animation_elev_m014_01.mp4}
+ \includegraphics[width=0.95\textwidth]{animation_elev_m014_01_screenshot}
+ % \movie[autostart,loop,open]
+ %   {\includegraphics[width=0.95\textwidth]{animation_elev_m014_01_screenshot}}
+ %   {animation_elev_m014_01.mp4}
   % \includemedia[
   %       width=13cm,height=7.2cm, %
   %       activate=pageopen,
@@ -293,12 +293,12 @@ SIAM J. Sci. Comput., 35(4), C369--C393. \url{https://doi.org/10.1137/120873558}
  \begin{itemize}
   \item Cost function:
 \begin{equation*}
- J(\mu) = \frac{1}{N_j N_i} \sum_{i,j} \frac{1}{Var(o_j)}((m_{j,i} - \overline{m_j}) - (o_{j,i} - \overline{o_j})^2 + J_{reg}
+ J(\mu) = \frac{1}{N_j N_i} \sum_{i,j} \frac{1}{Var(o_j)}\big((m_{j,i} - \overline{m_j}) - (o_{j,i} - \overline{o_j})\big)^2 + J_{reg}
 \end{equation*}
   \item Mean-Square-Deviation, Bias removed, Scaled by observation variance
   \begin{itemize}
    \item $o_{j,i}$, $m_{j,i}$: observation/model time series, $j$ stations, $i$ time steps
-   \item $\overline{m_j})$ time average
+   \item $\overline{m_j}$ time average
   \end{itemize}
   \item $J_{reg}$ additional regularization term
   \item Control variable: Manning friction coefficient $\mu$
@@ -317,7 +317,7 @@ SIAM J. Sci. Comput., 35(4), C369--C393. \url{https://doi.org/10.1137/120873558}
 \end{equation*}
   \item Squared norm of the Hessian matrix (2nd derivatives)
   \item $h$ is the local mesh element size, $A$ is total the mesh area
-  \item Scaling $\alpha=400$ chosen to achieve a smoothly varying Manning coefficinet ($\mu$) field
+  \item Scaling $\alpha=400$ chosen to achieve a smoothly varying Manning coefficient ($\mu$) field
  \end{itemize}
  \vspace*{5mm}
 \emph{Best way to avoid over-fitting is to use a sufficiently long optimization period}
